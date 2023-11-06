@@ -6,6 +6,20 @@
     <title>Tasks</title>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+
+            // by default, submit button is disabled
+            document.querySelector('#submit').disabled = true;
+
+            // enable submit button only when something is typed
+            document.querySelector('#task').onkeyup = () => {
+                if (document.querySelector('#task').value.length > 0) {
+                    document.querySelector('#submit').disabled = false;
+                } else {
+                    document.querySelector('#submit').disabled = true;
+                }
+            }
+
+            
             document.querySelector('form').onsubmit = () => {
                 const task = document.querySelector('#task').value;
                 console.log(task);
@@ -14,6 +28,10 @@
                 li.innerHTML = task;
 
                 document.querySelector('#tasks').append(li);
+
+                document.querySelector('#task').value = '';
+
+                document.querySelector('#submit').disabled = true;
 
                 // Stop form from submitting
                 return false;
@@ -27,7 +45,7 @@
     </ul>
     <form action="/">
         <input type="text" id="task" placeholder="New Task">
-        <input type="submit">
+        <input type="submit" id="submit">
     </form>
 </body>
 </html>
